@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Дубинин](https://up.htmlacademy.ru/javascript/19/user/851577).
-* Наставник: `Неизвестно`.
+* Наставник: [Илья Барашков](https://htmlacademy.ru/profile/mimir).
 
 ---
 
