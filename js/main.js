@@ -26,7 +26,7 @@ var descriptionOffer = 'Уют и комфорт во всём!';
 var mapClass = document.querySelector('.map');
 var card = document.querySelector('#card');
 var mapPins = document.querySelector('.map__pins');
-var pin = document.querySelector('#pin');
+var pin = document.querySelector('#pin').content.querySelector('.map__pin');
 
 // Функции
 
@@ -112,20 +112,13 @@ var getOffer = function (number) {
   };
 };
 
-var getOffersArroy = function () {
-  var offersArroy = [];
+var getOffersArray = function () {
+  var offersArray = [];
   for (var i = 1; i <= OFFERS_AMOUNT; i++) {
-    offersArroy.push(getOffer(i));
+    offersArray.push(getOffer(i));
   }
-  return offersArroy;
+  return offersArray;
 };
-
-getOffersArroy();
-
-console.log(getOffersArroy());
-
-document.querySelector('.map__pins');
-console.dir(document.querySelector('.map__pins'));
 
 var removeClass = function (element, className) {
   element.classList.remove(className);
@@ -154,8 +147,10 @@ var renderOffer = function (ad) {
 var renderPin = function (ad) {
   var pinElement = pin.cloneNode(true);
 
-  pinElement.querySelector('.map__pin').style.left = ad.location.x;
-  pinElement.querySelector('.map__pin').style.top = ad.location.y;
+  pinElement.querySelector('img').src = ad.author.avatar;
+  pinElement.querySelector('img').alt = titleElement;
+  pinElement.style.left = ad.location.x + 'px';
+  pinElement.style.top = ad.location.y + 'px';
 
   return pinElement;
 
@@ -171,4 +166,4 @@ var renderOffers = function (offers) {
   mapPins.appendChild(fragment);
 };
 
-renderOffers(OFFERS_AMOUNT);
+renderOffers(getOffersArray());
