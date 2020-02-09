@@ -21,8 +21,8 @@ var PIN_X_OFFSET = 20;
 var PIN_Y_OFFSET = 40;
 
 // Переменные
-var titleElement = 'Дом на берегу озера';
-var descriptionOffer = 'Уют и комфорт во всём!';
+var titleElement = ['Дом на берегу озера', 'Квартира в центре города', 'Аппартаменты на окраине'];
+var descriptionOffer = ['Уют и комфорт во всём!', 'Недорого и со вкусом', 'Джакузи и бассейн прямо в номере'];
 var mapClass = document.querySelector('.map');
 var card = document.querySelector('#card');
 var mapPins = document.querySelector('.map__pins');
@@ -69,6 +69,14 @@ var getRandomFeatures = function () {
   return getElements(FEATURES, 1, FEATURES.length);
 };
 
+var getRandomTitle = function () {
+  return getRandomArrElement(titleElement);
+};
+
+var getRandomDescription = function () {
+  return getRandomArrElement(descriptionOffer);
+};
+
 var getRandomPhotos = function () {
   return getElements(PHOTOS, 1, PHOTOS.length);
 };
@@ -93,7 +101,7 @@ var getOffer = function (number) {
       avatar: getAvatar(number)
     },
     offer: {
-      title: titleElement,
+      title: getRandomTitle,
       address: location.x + ', ' + location.y,
       price: getRandomNumber(10, 1000),
       type: getRandomArrElement(TYPE),
@@ -102,7 +110,7 @@ var getOffer = function (number) {
       checkin: getRandomCheckTime(),
       checkout: getRandomCheckTime(),
       features: getRandomFeatures(),
-      description: descriptionOffer,
+      description: getRandomDescription,
       photos: getRandomPhotos()
     },
     location: {
@@ -123,8 +131,6 @@ var getOffersArray = function () {
 var removeClass = function (element, className) {
   element.classList.remove(className);
 };
-
-removeClass(mapClass, 'map--faded');
 
 var renderOffer = function (ad) {
   var offerElement = card.cloneNode(true);
@@ -153,7 +159,6 @@ var renderPin = function (ad) {
   pinElement.style.top = ad.location.y + 'px';
 
   return pinElement;
-
 };
 
 var renderOffers = function (offers) {
@@ -165,5 +170,5 @@ var renderOffers = function (offers) {
   }
   mapPins.appendChild(fragment);
 };
-
+removeClass(mapClass, 'map--faded');
 renderOffers(getOffersArray());
