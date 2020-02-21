@@ -1,15 +1,5 @@
 'use strict';
-// создать массивы(константы)
-// функция рандомного числа
-// функция случайного элемента массива
-// функция перемешивания массива
-// функция случайного количества элементов перемешаного массива
-// функция для аватара img/avatars/user{{xx}}.png где х от 01 до 08 где нет повторов
-// функция создания 1 объекта
-// функция создания массива из 8 объектов
 
-
-// Константы
 var FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
 var PHOTOS = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg', 'http://o0.github.io/assets/images/tokyo/hotel2.jpg', 'http://o0.github.io/assets/images/tokyo/hotel3.jpg'];
 var CHECKTIMES = ['12:00', '13:00', '14:00'];
@@ -25,17 +15,14 @@ var MAX_Y = 630;
 var OFFERS_AMOUNT = 8;
 var PIN_X_OFFSET = 20;
 var PIN_Y_OFFSET = 40;
-var TITLE_ELEMENT = ['Дом на берегу озера', 'Квартира в центре города', 'Аппартаменты на окраине'];
-var DESCRIPTON_OFFER = ['Уют и комфорт во всём!', 'Недорого и со вкусом', 'Джакузи и бассейн прямо в номере'];
-// Переменные
+var TITLE_ELEMENTS = ['Дом на берегу озера', 'Квартира в центре города', 'Аппартаменты на окраине'];
+var DESCRIPTON_OFFERS = ['Уют и комфорт во всём!', 'Недорого и со вкусом', 'Джакузи и бассейн прямо в номере'];
 
-var mapClass = document.querySelector('.map');
+var mapBlock = document.querySelector('.map');
 var card = document.querySelector('#card').content.querySelector('.map__card');
 var mapPins = document.querySelector('.map__pins');
 var pin = document.querySelector('#pin').content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
-
-// Функции
 
 
 var getRandomNumber = function (min, max) {
@@ -77,11 +64,11 @@ var getRandomFeatures = function () {
 };
 
 var getRandomTitle = function () {
-  return getRandomArrElement(TITLE_ELEMENT);
+  return getRandomArrElement(TITLE_ELEMENTS);
 };
 
 var getRandomDescription = function () {
-  return getRandomArrElement(DESCRIPTON_OFFER);
+  return getRandomArrElement(DESCRIPTON_OFFERS);
 };
 
 var getRandomPhotos = function () {
@@ -157,12 +144,13 @@ var renderPhotos = function (offerPhotos) {
     photoElement.src = offerPhotos[i];
     photoElement.width = '45';
     photoElement.height = '40';
-    photoElement.alt = '"Фотография жилья"';
+    photoElement.alt = 'Фотография жилья';
     photoElement.classList.add('popup__photo');
     fragment.appendChild(photoElement);
   }
   return fragment;
 };
+
 var renderOffer = function (ad) {
   var offerElement = card.cloneNode(true);
   var popupFeatures = offerElement.querySelector('.popup__features');
@@ -188,7 +176,7 @@ var renderPin = function (ad) {
   var pinElement = pin.cloneNode(true);
 
   pinElement.querySelector('img').src = ad.author.avatar;
-  pinElement.querySelector('img').alt = TITLE_ELEMENT;
+  pinElement.querySelector('img').alt = TITLE_ELEMENTS;
   pinElement.style.left = ad.location.x + 'px';
   pinElement.style.top = ad.location.y + 'px';
 
@@ -207,8 +195,8 @@ var renderPins = function (offers) {
 
 var renderCard = function (offer) {
   var cardElement = renderOffer(offer);
-  mapClass.insertBefore(cardElement, mapFiltersContainer);
+  mapBlock.insertBefore(cardElement, mapFiltersContainer);
 };
 
-removeClass(mapClass, 'map--faded');
+removeClass(mapBlock, 'map--faded');
 renderPins(getOffersArray());
