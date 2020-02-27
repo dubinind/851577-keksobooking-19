@@ -1,7 +1,7 @@
-# Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
+# Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дмитрий Дубинин](https://up.htmlacademy.ru/javascript/19/user/851577).
-* Наставник: `Неизвестно`.
+* Наставник: [Илья Барашков](https://htmlacademy.ru/profile/mimir).
 
 ---
 
@@ -48,5 +48,5 @@ git clone SSH-адрес_вашего_форка
 
 Репозиторий создан для обучения на интенсивном онлайн‑курсе «[Профессиональный JavaScript](https://htmlacademy.ru/intensive/javascript)», уровень 1 от [HTML Academy](https://htmlacademy.ru).
 
-[travis-image]: https://travis-ci.com/htmlacademy-javascript/851577-code-and-magick-19.svg?branch=master
-[travis-url]: https://travis-ci.com/htmlacademy-javascript/851577-code-and-magick-19
+[travis-image]: https://travis-ci.com/htmlacademy-javascript/851577-keksobooking-19.svg?branch=master
+[travis-url]: https://travis-ci.com/htmlacademy-javascript/851577-keksobooking-19
