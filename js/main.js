@@ -236,7 +236,6 @@ var renderPins = function (offersData) {
   }
 
   mapPins.appendChild(fragment);
-  // renderCard(offers[0]);
 };
 
 var setFormDisabled = function (arr) {
@@ -271,8 +270,7 @@ var setActiveState = function () {
   setFormEnabled(formSelects);
   renderPins(offers);
   mapPins.addEventListener('mousedown', onPinMouseDown);
-
-  // onMapPinsMouseDown();
+  mapPins.addEventListener('keydown', onPinKeyDown);
 };
 
 var onMapPinMouseDown = function (evt) {
@@ -318,16 +316,6 @@ var onAdFormChange = function (evt) {
   }
 };
 
-// var onMapPinsMouseDown = function () {
-//   var mapPinsList = document.querySelectorAll('.map__pin');
-//   for (var i = 0; i < mapPinsList.length; i++) {
-//     var pinElement = mapPinsList[i];
-//     pinElement.addEventListener('mousedown', onPinMouseDown);
-//     pinElement.addEventListener('keydown', onPinKeyDown);
-//   }
-// };
-
-
 var onButtonSubmitClick = function (evt) {
   evt.preventDefault();
   var rooms = roomNumber.value;
@@ -349,8 +337,23 @@ var renderCardPopup = function (i) {
 
 var onPinKeyDown = function (evt) {
   if (evt.key === ENTER_KEY) {
+    openCardPopup(evt);
+  }
+};
+
+var openCardPopup = function (evt) {
+  var target;
+  if (evt.target.tagName === 'IMG' && evt.target.parentElement.classList.contains('map__pin')
+  && !evt.target.parentElement.classList.contains('map__pin--main')) {
+    target = evt.target.parentElement;
+
+  } else if (evt.target.classList.contains('map__pin')
+  && !evt.target.classList.contains('map__pin--main')) {
+    target = evt.target;
+  }
+  if (target) {
     var popup = document.querySelector('.popup');
-    var indexOffer = pinsElements.indexOf(evt.target);
+    var indexOffer = pinsElements.indexOf(target);
     if (popup) {
       mapBlock.removeChild(popup);
     }
@@ -361,34 +364,11 @@ var onPinKeyDown = function (evt) {
 };
 
 var onPinMouseDown = function (evt) {
-  var target = evt.target;
-  if (target !== mapPinMain && target.classList.contains('map__pin')) {
-    console.log('work');
+  if (evt.button !== 0) {
+    return;
   }
-  if (evt.button === 0) {
-    var popup = document.querySelector('.popup');
-    var indexOffer = pinsElements.indexOf(evt.currentTarget);
-    if (popup) {
-      mapBlock.removeChild(popup);
-    }
-    if (indexOffer !== -1) {
-      renderCardPopup(indexOffer);
-    }
-  }
+  openCardPopup(evt);
 };
-
-// var onPinMouseDown = function (evt) {
-//   if (evt.button === 0) {
-//     var popup = document.querySelector('.popup');
-//     var indexOffer = pinsElements.indexOf(evt.currentTarget);
-//     if (popup) {
-//       mapBlock.removeChild(popup);
-//     }
-//     if (indexOffer !== -1) {
-//       renderCardPopup(indexOffer);
-//     }
-//   }
-// };
 
 var closePopupMouseDown = function (evt) {
   var popup = document.querySelector('.popup');
