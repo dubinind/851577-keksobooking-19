@@ -7,10 +7,9 @@
     house: 'Дом',
     bungalo: 'Бунгало'
   };
-
-  var mapFiltersContainer = document.querySelector('.map__filters-container');
-  var card = document.querySelector('#card').content.querySelector('.map__card');
   var mapBlock = document.querySelector('.map');
+  var mapFiltersContainer = mapBlock.querySelector('.map__filters-container');
+  var card = document.querySelector('#card').content.querySelector('.map__card');
 
   var renderFeatures = function (offerFeatures) {
     var fragment = document.createDocumentFragment();

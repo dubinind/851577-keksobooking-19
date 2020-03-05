@@ -7,7 +7,6 @@
   var TYPES = ['palace', 'flat', 'house', 'bungalo'];
   var MIN_Y = 130;
   var MAX_Y = 630;
-  var OFFERS_AMOUNT = 8;
   var PIN_X_OFFSET = 20;
   var PIN_Y_OFFSET = 40;
   var TITLE_ELEMENTS = ['Дом на берегу озера', 'Квартира в центре города', 'Аппартаменты на окраине'];
@@ -82,9 +81,7 @@
     return offers;
   };
 
-  var offers = getOffers(OFFERS_AMOUNT);
-
   window.data = {
-    offers: offers,
+    getOffers: getOffers,
   };
 })();

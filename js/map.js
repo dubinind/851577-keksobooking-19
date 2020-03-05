@@ -3,9 +3,9 @@
 (function () {
   var ESC_KEY = 'Escape';
   var ENTER_KEY = 'Enter';
+  var OFFERS_AMOUNT = 8;
 
   var mapBlock = document.querySelector('.map');
-  var pin = document.querySelector('#pin').content.querySelector('.map__pin');
   var mapFeatures = document.querySelector('.map__features');
   var formInputs = document.querySelectorAll('fieldset');
   var mapFilter = document.querySelector('.map__filters');
@@ -14,6 +14,7 @@
   var formType = adForm.querySelector('#type');
   var mapPinMain = document.querySelector('.map__pin--main');
   var mapPins = document.querySelector('.map__pins');
+  var addressPin = document.querySelector('#address');
   var IMG_AFTER_HEIGHT = 22;
   var IMG_WIDTH = 62;
   var IMG_HEIGHT = 62;
@@ -25,6 +26,7 @@
   var pinLocY = pinLocationY + pinCenterY;
   var pinAfterY = pinLocationY + IMG_HEIGHT + IMG_AFTER_HEIGHT;
   var pinsElements = [];
+  var offers = window.data.getOffers(OFFERS_AMOUNT);
 
   var onClosePopupMouseDown = function (evt) {
     var popup = document.querySelector('.popup');
@@ -50,21 +52,10 @@
     document.addEventListener('keydown', closePopupKeyDown);
   };
 
-  var renderPin = function (ad) {
-    var pinElement = pin.cloneNode(true);
-
-    pinElement.querySelector('img').src = ad.author.avatar;
-    pinElement.querySelector('img').alt = window.util.TITLE_ELEMENTS;
-    pinElement.style.left = ad.location.x + 'px';
-    pinElement.style.top = ad.location.y + 'px';
-
-    return pinElement;
-  };
-
   var renderPins = function (offersData) {
     var fragment = document.createDocumentFragment();
     for (var i = 0; i < offersData.length; i++) {
-      var pinEl = renderPin(offersData[i]);
+      var pinEl = window.pin.renderPin(offersData[i]);
       pinsElements.push(pinEl);
       fragment.appendChild(pinEl);
     }
@@ -73,7 +64,7 @@
   };
 
   var renderCardPopup = function (i) {
-    window.card.renderCard(window.data.offers[i]);
+    window.card.renderCard(offers[i]);
     onPopupCloseMouseDown();
     onPopupCloseKeyDown();
   };
@@ -104,16 +95,18 @@
     window.util.addClass(adForm, 'ad-form--disabled');
     mapFilter.setAttribute('disabled', 'disabled');
     mapFeatures.setAttribute('disabled', 'disabled');
-    document.querySelector('#address').value = pinLocX + ', ' + pinLocY;
+    addressPin.value = pinLocX + ', ' + pinLocY;
     window.form.setFormDisabled(formInputs);
     window.form.setFormDisabled(formSelects);
     window.form.syncPrice(formType.value);
   };
 
   var onPinKeyDown = function (evt) {
-    if (evt.key === ENTER_KEY) {
-      openCardPopup(evt);
+    if (evt.key !== ENTER_KEY) {
+      return;
     }
+    openCardPopup(evt);
+
   };
 
   var onPinMouseDown = function (evt) {
@@ -128,15 +121,16 @@
     window.util.removeClass(adForm, 'ad-form--disabled');
     mapFilter.removeAttribute('disabled', 'disabled');
     mapFeatures.removeAttribute('disabled', 'disabled');
-    document.querySelector('#address').value = pinLocX + ', ' + pinAfterY;
+    addressPin.value = pinLocX + ', ' + pinAfterY;
     window.form.setFormEnabled(formInputs);
     window.form.setFormEnabled(formSelects);
-    renderPins(window.data.offers);
+    renderPins(offers);
     mapPins.addEventListener('mousedown', onPinMouseDown);
     mapPins.addEventListener('keydown', onPinKeyDown);
   };
 
   setInactiveState();
+
   window.map = {
     setActiveState: setActiveState
   };

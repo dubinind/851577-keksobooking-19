@@ -37,6 +37,7 @@
   var addClass = function (element, className) {
     element.classList.add(className);
   };
+
   window.util = {
     getRandomNumber: getRandomNumber,
     getRandomArrElement: getRandomArrElement,
