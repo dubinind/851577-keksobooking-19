@@ -20,8 +20,8 @@
   var IMG_HEIGHT = 62;
   var pinCenterX = Math.floor(IMG_WIDTH / 2);
   var pinCenterY = Math.floor(IMG_HEIGHT / 2);
-  var pinLocationX = Number(mapPinMain.style.top.replace('px', ''));
-  var pinLocationY = Number(mapPinMain.style.left.replace('px', ''));
+  var pinLocationX = Number(mapPinMain.style.left.replace('px', ''));
+  var pinLocationY = Number(mapPinMain.style.top.replace('px', ''));
   var pinLocX = pinLocationX + pinCenterX;
   var pinLocY = pinLocationY + pinCenterY;
   var pinAfterY = pinLocationY + IMG_HEIGHT + IMG_AFTER_HEIGHT;
