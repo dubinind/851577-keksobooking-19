@@ -3,7 +3,7 @@
 (function () {
   var ESC_KEY = 'Escape';
   var ENTER_KEY = 'Enter';
-  var OFFERS_AMOUNT = 8;
+  // var OFFERS_AMOUNT = 8;
 
   var mapBlock = document.querySelector('.map');
   var mapFeatures = document.querySelector('.map__features');
@@ -26,7 +26,7 @@
   var pinLocY = pinLocationY + pinCenterY;
   var pinAfterY = pinLocationY + IMG_HEIGHT + IMG_AFTER_HEIGHT;
   var pinsElements = [];
-  var offers = window.data.getOffers(OFFERS_AMOUNT);
+  var offers = window.data.offers;
 
   var onClosePopupMouseDown = function (evt) {
     var popup = document.querySelector('.popup');
